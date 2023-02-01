@@ -1,21 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
 
-export default function Cart() {
+export default function Cart(props) {
+    let { cart, stt } = props;
+    let [quantity, setQuantity] = useState(0);
+    quantity = (cart.quantity == 0) ? quantity : cart.quantity;
     return (
         <tr>
-            <th scope="row">1</th>
-            <td>Pizza</td>
-            <td>12 USD</td>
+            <th scope="row">{stt}</th>
+            <td>{cart.product.productName}</td>
+            <td>{cart.product.price} USD</td>
             <td>
                 <input
                     name="cart-item-quantity-1"
                     type="number"
-                    defaultValue={1}
                     min={1}
+                    value={quantity}
+                    onChange={(event) => setQuantity(event.target.value)}
                 />
             </td>
             <td>
-                <strong>12 USD</strong>
+                <strong>{cart.product.price * cart.quantity} USD</strong>
             </td>
             <td>
                 <a

@@ -1,7 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from "react-redux";
+import { useState } from 'react';
+import { act_buy_product, act_change_notify } from '../actions';
 
 export default function Product(props) {
+    const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(1);
     let { product } = props;
+    const handleBuyProduct = () => {
+        dispatch(act_buy_product(product, quantity));
+        dispatch(act_change_notify("Buy product successfull!!!"));
+    }
     let elementBuy = "";
     if (product.quantity == 0) {
         elementBuy = <span className="price"> {product.price} USD</span>;
@@ -12,8 +21,9 @@ export default function Product(props) {
                 type="number"
                 defaultValue={1}
                 min={1}
+                onChange={(event) => setQuantity(event.target.value)}
             />
-            <a data-product={1} href="#" className="price">
+            <a data-product={1} href="#" className="price" onClick={handleBuyProduct}>
                 {" "}
                 {product.price} USD{" "}
             </a>

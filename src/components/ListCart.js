@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 export default function ListCart() {
     const listCart = useSelector(state => state.listCart);
+    console.log("LIST CART-->", listCart);
     let elementListCart = listCart.map((cart, index) => {
         return <Cart key={cart.product.productId} cart={cart} stt={index + 1} />
     })

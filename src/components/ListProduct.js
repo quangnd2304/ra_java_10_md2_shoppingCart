@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 export default function ListProduct() {
     // Lấy dữ liệu state (listProduct) từ store
     const listProduct = useSelector(state => state.listProduct);
+
     let elementListProduct = listProduct.map(product => {
         return <Product key={product.productId} product={product} />;
     })

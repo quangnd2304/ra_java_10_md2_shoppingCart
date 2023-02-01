@@ -22,7 +22,7 @@ export default function CartInfo() {
                 There are <b>{listCart.length}</b> items in your shopping cart.
             </td>
             <td colSpan={2} className="total-price text-left">
-                {calTotalAmount} USD
+                {calTotalAmount()} USD
             </td>
         </tr>;
     }
