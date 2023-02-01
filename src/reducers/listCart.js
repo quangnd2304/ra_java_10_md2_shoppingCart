@@ -1,4 +1,4 @@
-import { BUY_PRODUCT } from "../constants/actionType";
+import { BUY_PRODUCT, DELETE_CART, UPDATE_CART } from "../constants/actionType";
 import { SHOP_CARTS } from "../constants/shoppingCart";
 let initialState = [];
 // Giỏ hàng được lưu trong localStorage với tên là SHOP_CARTS
@@ -27,6 +27,17 @@ const listCart = (state = initialState, action) => {
             }
             //set giỏ hàng vào localStorage
             localStorage.setItem(SHOP_CARTS, JSON.stringify(state));
+            return [...state];
+        case UPDATE_CART:
+            let { productId, quantity } = action.payload;
+            let indexUpdate = getIndexProduct(productId, state);
+            state[indexUpdate].quantity = quantity;
+            //set giỏ hàng vào localStorage
+            localStorage.setItem(SHOP_CARTS, JSON.stringify(state));
+            return [...state];
+        case DELETE_CART:
+            let indexDelete = getIndexProduct(state.payload, state);
+            state.splice(indexDelete, 1);
             return [...state];
         default:
             return state;
